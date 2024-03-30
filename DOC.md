@@ -55,6 +55,22 @@ Decommenting the ForeignKey leads to working solution:
 <QuerySet [{'last_updated_by__pk': 1, 'last_updated_by__username': 'admin'}]>
 ```
 
+## IT WORKS without db_constraint and db_index
+
+```
+>>> from noopfk.models import Event
+>>> Event.objects.values("last_updated_by__pk", "last_updated_by__username")
+<QuerySet [{'last_updated_by__pk': 1, 'last_updated_by__username': 'admin'}]>
+>>> Event.objects.values("created_by__pk", "created_by__username")
+<QuerySet [{'created_by__pk': 1, 'created_by__username': 'admin'}]>
+>>> Event.objects.filter(last_updated_by__username__startswith="cielcio")
+<QuerySet []>
+>>> Event.objects.filter(last_updated_by__username__startswith="a")
+<QuerySet [<Event: Event object (1)>]>
+>>> 
+```
+
+## If you want...
 
 IF YOU WANT TO Add Foreign Key constraint into the database, write the code below in `python manage.py dbshell`, 
 but it is not needed, and simetimes discouraged. We discourage it on a generated field:
