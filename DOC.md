@@ -57,17 +57,22 @@ Decommenting the ForeignKey leads to working solution:
 
 ## IT WORKS without db_constraint and db_index
 
+./manage.py migrate  # No matter about errors
+./manage.py createsuperuser
+./manage.py shell
+
 ```
 >>> from noopfk.models import Event
->>> Event.objects.values("last_updated_by__pk", "last_updated_by__username")
-<QuerySet [{'last_updated_by__pk': 1, 'last_updated_by__username': 'admin'}]>
+>>> from django.contrib.auth.models import User
+>>> Event.objects.create(name="releasing Django 6.0", created_by=User.objects.first())
 >>> Event.objects.values("created_by__pk", "created_by__username")
 <QuerySet [{'created_by__pk': 1, 'created_by__username': 'admin'}]>
->>> Event.objects.filter(last_updated_by__username__startswith="cielcio")
+>>> Event.objects.values("last_updated_by__pk", "last_updated_by__username")
+<QuerySet [{'last_updated_by__pk': 1, 'last_updated_by__username': 'admin'}]>
+>>> Event.objects.filter(last_updated_by__username__startswith="cielcio").values()
 <QuerySet []>
->>> Event.objects.filter(last_updated_by__username__startswith="a")
+>>> Event.objects.filter(last_updated_by__username__startswith="a").values()
 <QuerySet [<Event: Event object (1)>]>
->>> 
 ```
 
 ## If you want...
