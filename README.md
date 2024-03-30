@@ -20,17 +20,12 @@ Really not many. If you want to take advantage of this feature, you must specify
 - the first one is the GeneratedField with output_field=BigIntegerField() or the value of your ForeignKey
 - the second one is the NoopForeignKey the will be the accessor for the first one.
 
-## Try it
-
-./manage.py migrate admin auth contenttypes sessions
-./manage.py migrate --skip-checks web 0001
-
-Follow DOC.md
-
-## Try the working solution
+## Try the working solution in the "noopfk" application
 
 ./manage.py migrate  # No matter about errors
+
 ./manage.py createsuperuser
+
 ./manage.py shell
 
 ```
@@ -46,3 +41,12 @@ Follow DOC.md
 >>> Event.objects.filter(last_updated_by__username__startswith="a").values()
 <QuerySet [<Event: Event object (1)>]>
 ```
+
+## Try other stuff in the "web" application
+
+./manage.py migrate admin auth contenttypes sessions
+
+./manage.py migrate --skip-checks web 0001
+
+Follow DOC.md
+
