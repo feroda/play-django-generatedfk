@@ -20,22 +20,5 @@ class Event(models.Model):
                         output_field=models.BigIntegerField(),
                         db_index=True, db_persist=True)
     
-    # Non lo trova come parametro quando metti il nome del campo nella values
-    # django.core.exceptions.FieldError: Cannot resolve keyword 'last_updated_by' into field. Choices are: canceled_by, canceled_by_id, confirmed_by, confirmed_by_id, created_by, created_by_id, id, last_updated_by_id, name
-    # last_updated_by = ForwardManyToOneDescriptor(
-    #                     models.ForeignKey(User, on_delete=models.SET_NULL,
-    #                         db_column="last_updated_by_id", db_constraint=False,
-    #                         related_name="last_updated_events_set", null=True))
-
     last_updated_by = NoopForeignKey(User, on_delete=models.SET_NULL,
-                            ## optional, but I prefer to leave index: db_index=False,
                             related_name="last_updated_events_set", null=True)
-
-    # @classmethod
-    # def _check_field_name_clashes(cls):
-    #     return []
-
-    # @classmethod
-    # def _check_column_name_clashes(cls):
-    #     return []
-        
