@@ -50,3 +50,6 @@ Really not many. If you want to take advantage of this feature, you must specify
 
 Follow DOC.md
 
+## History
+
+Check [my - short - commit history](https://github.com/feroda/play-django-generatedfk/commits/main/) if you are interested in my other attempts with related fields and descriptors.
