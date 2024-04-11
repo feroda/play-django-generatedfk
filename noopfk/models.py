@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.functions import Greatest
-from django.db.models.fields.related_descriptors import ForwardManyToOneDescriptor
 
 from .fields import NoopForeignKey
 
