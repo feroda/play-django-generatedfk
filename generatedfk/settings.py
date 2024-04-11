@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # 'web',
     'noopfk',
     'fobject',
+    'fgenfield',
 ]
 
 MIDDLEWARE = [
