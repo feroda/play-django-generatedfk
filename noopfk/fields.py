@@ -1,7 +1,10 @@
-from django.db.models import ForeignKey
+from django.db import models
 
 
-class NoopForeignKey(ForeignKey):
+class NoopForeignKey(models.ForeignKey):
+
+    def __init__(self, model, on_delete=None, *args, **kw):
+        super().__init__(model, on_delete=models.deletion.DO_NOTHING, *args, **kw)
 
     def db_type(self, connection):
         # No db_type since GeneratedField has already been created
